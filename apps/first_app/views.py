@@ -6,6 +6,7 @@ def index(request):
 		context = {
 				"secrets": Secret.objects.all().order_by('-created_at'),
 				"likes": Like.objects.all()
+				
 			}	
 		return render(request, 'first_app/index.html', context)
 
@@ -16,3 +17,4 @@ def index(request):
 def like(request, secret_id):
 	Like.objects.create(secret=secret_id)
 	return redirect('/')
+
