@@ -4,6 +4,5 @@ from . import views
 
 urlpatterns = [
 	url(r'^$', views.index),
-	url(r'^ninjas/$', views.ninjas),
-	url(r'^ninjas/(?P<color>\w+)$', views.ninjas)
+	url(r'^like/(?P<secret_id>[0-9]+)$', views.like)
 ]

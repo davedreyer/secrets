@@ -1,27 +1,18 @@
 from django.shortcuts import render, redirect
+from .models import Secret, Like
 
 def index(request):
-	return render(request, 'first_app/index.html')
+	if request.method == "GET":
+		context = {
+				"secrets": Secret.objects.all().order_by('-created_at'),
+				"likes": Like.objects.all()
+			}	
+		return render(request, 'first_app/index.html', context)
 
-def ninjas(request, color = None):
+	elif request.method == "POST":	
+		Secret.objects.create(secret=request.POST['secret'])
+		return redirect('/')
 
-	if color == None:
-		ninjas = ['first_app/images/leonardo.jpg','first_app/images/michelangelo.jpg','first_app/images/raphael.jpg','first_app/images/donatello.jpg']
-		context = {'ninjas': ninjas}	
-
-	elif color == 'blue':
-		context = {'ninjas': ['first_app/images/leonardo.jpg']}
-
-	elif color == 'orange':
-		context = {'ninjas': ['first_app/images/michelangelo.jpg']}	
-	
-	elif color == 'red':
-		context = {'ninjas': ['first_app/images/raphael.jpg']}	
-
-	elif color == 'purple':
-		context = {'ninjas': ['first_app/images/donatello.jpg']}		
-
-	else: 
-		context = {'ninjas': ['first_app/images/notapril.jpg']}	
-
-	return render(request, 'first_app/ninjas.html', context)	
+def like(request, secret_id):
+	Like.objects.create(secret=secret_id)
+	return redirect('/')
