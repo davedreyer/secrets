@@ -1,0 +1,22 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+#container{
+	margin: 5px;
+	padding: 15px;
+	width: 960px;
+}
+
+#submit_button{
+	padding: 0px 8px 0px 8px;
+	border: 2px solid black;
+	background-color: #009E0F;
+	color: #FEFFFF;
+	vertical-align: top;
+}
+
+table{
+	margin-top: 20px;
+}

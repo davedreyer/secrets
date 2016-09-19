@@ -6,28 +6,41 @@
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</link>
+	
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'first_app/css/styles.css' %}">
+
 </head>
 <body>
-	<form action='' method='POST'>
-		{% csrf_token %}
-		Secret: <input type="text" name="secret"/>
-		<input type="submit" value="Submit" />
-	</form>
-	<table id='table'>
-			<tr>
-				<th>Secret</th>
-				<th>Created At</th>
-				<th>Like</th>
-				<ht>Likes</ht>
-			</tr>
-			{% for x in secrets %}
-			<tr>
-				<td>{{x.secret}}</td>
-				<td>{{x.created_at}}</td>
-				<td><a href='like/{{x.id}}'>Like!</a></td>
-				<td></td>
-			</tr>
-			{% endfor %} 
-		</table>	
+	<div id="container">
+		<form action='' method='POST'>
+			{% csrf_token %}
+			Secret: <input type="text" name="secret" />
+			<input type="submit" value="Submit" id="submit_button">
+		</form>
+		<table class="table table-bordered table-hover">
+			<thead>	
+				
+				<tr>
+					<th>Secret</th>
+					<th>Created At</th>
+					<th>Like</th>
+					<th>Likes</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+				{% for x in secrets %}
+					<td>{{x.secret}}</td>
+					<td>{{x.created_at}}</td>
+					<td><a href='like/{{x.id}}'>Like!</a></td>
+					<td></td>
+				</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>	
 </body>
 </html>
